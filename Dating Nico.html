@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="de" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>😊 Nico's Profil • Wilhelmshaven</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="css/tailwind.css"></script>
+    
+    <!-- Canvas Confetti -->
+    <script src="js/confetti.browser.min.js"></script>
+
+    <!-- Google Fonts & Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        rose: {
+                            450: '#f43f5e',
+                            550: '#e11d48',
+                        },
+                        velvet: {
+                            900: '#110712',
+                            800: '#1c0c20',
+                            700: '#2a1230',
+                        }
+                    },
+                    animation: {
+                        'float-slow': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 3s infinite',
+                        'shimmer': 'shimmer 2.5s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '0.6', transform: 'scale(1)' },
+                            '50%': { opacity: '0.9', transform: 'scale(1.05)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+<style>
+        /* Custom Glassmorphism Utilities */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .glass-card-hover:hover {
+            transform: translateY(-6px) scale(1.01);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(244, 63, 94, 0.4);
+            box-shadow: 0 25px 60px rgba(244, 63, 94, 0.18);
+        }
+
+        .glass-input {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            color: #ffffff;
+        }
+
+        .glass-input:focus {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #f43f5e;
+            outline: none;
+            box-shadow: 0 0 15px rgba(244, 63, 94, 0.3);
+        }
+
+        /* Gradient Glow Effects */
+        .gradient-text {
+            background: linear-gradient(135deg, #f43f5e 0%, #fb7185 40%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-btn {
+            background: linear-gradient(135deg, #e11d48 0%, #be123c 50%, #9333ea 100%);
+            box-shadow: 0 8px 25px rgba(225, 29, 72, 0.35);
+            transition: all 0.3s ease;
+        }
+
+        .gradient-btn:hover {
+            box-shadow: 0 12px 35px rgba(225, 29, 72, 0.55);
+            transform: translateY(-2px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #110712;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(244, 63, 94, 0.3);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(244, 63, 94, 0.6);
+        }
+
+        /* Background Particle Canvas */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* iOS Safe Area Insets */
+        body {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+		
+/* Die exakten Siri AI Farben im fließenden Kreisverlauf */
+.bg-siri-palette {
+  background: conic-gradient(
+    from 0deg,
+    #79c4fb 0%,    /* Sky Blue */
+    #bdadfd 14%,   /* Periwinkle */
+    #d795fd 28%,   /* Lilac / Violet */
+    #ff2e54 42%,   /* Coral Pink */
+    #ff9004 56%,   /* Amber / Peach */
+    #eddd53 71%,   /* Sun Yellow */
+    #9cf1dc 85%,   /* Mint Green */
+    #79c4fb 100%   /* Loop zurück zu Sky Blue */
+  );
+}
+
+@keyframes siri-ai-glow {
+  0% {
+    transform: rotate(0deg) scale(1);
+    filter: brightness(1);
+  }
+  25% {
+    transform: rotate(90deg) scale(1.15); /* Erster kleiner Impuls */
+    filter: brightness(1.15);
+  }
+  50% {
+    transform: rotate(180deg) scale(1);
+    filter: brightness(1);
+  }
+  75% {
+    transform: rotate(270deg) scale(1.15); /* Zweiter Impuls */
+    filter: brightness(1.15);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    filter: brightness(1);
+  }
+}
+
+.animate-siri-ai {
+  /* Sekunden pro Umdrehung für eine edle, flüssige Bewegung */
+  animation: siri-ai-glow 15.0s ease-in-out infinite;
+}
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-950 via-purple-950 to-pink-950 text-slate-100 font-sans min-h-screen relative overflow-x-hidden">
+
+    <!-- Floating Background Particles Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Glowing Background Ambient Orbs -->
+    <div class="fixed top-[-10%] left-[-10%] w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-rose-600/20 rounded-full blur-[100px] sm:blur-[140px] pointer-events-none z-0"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] bg-purple-600/20 rounded-full blur-[120px] sm:blur-[160px] pointer-events-none z-0"></div>
+
+    <!-- Sticky Glass Navigation -->
+    <header class="sticky top-0 z-40 w-full backdrop-blur-xl bg-velvet-900/80 border-b border-white/10">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2 group">
+                <span class="w-9 h-9 rounded-full gradient-btn flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:scale-105 transition-transform">
+                    N
+                </span>
+                <span class="font-serif font-bold text-xl tracking-wide text-white group-hover:text-rose-400 transition-colors">
+                    Nico<span class="text-rose-500">.</span>
+                </span>
+            </a>
+
+            <!-- Nav Links (Desktop) -->
+            <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+                <a href="#about" class="hover:text-rose-400 transition-colors">Über mich</a>
+                <a href="#quiz" class="hover:text-rose-400 transition-colors">Match-Quiz</a>
+                <a href="#gallery" class="hover:text-rose-400 transition-colors">Fotos</a>
+                <a href="#date-form" class="hover:text-rose-400 transition-colors">Date-Planer</a>
+                <a href="#comments" class="hover:text-rose-400 transition-colors">Gästebuch</a>
+            </nav>
+
+            <!-- Quick CTA & Mobile Hamburger -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <a href="#date-form" class="gradient-btn text-white text-xs sm:text-sm font-semibold px-3.5 py-2 rounded-full flex items-center gap-1.5 sm:gap-2">
+                    <span>Date anfragen</span>
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/></svg>
+                </a>
+                
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-xl bg-white/10 text-white hover:bg-white/20 border border-white/15 transition min-w-[40px] min-h-[40px] flex items-center justify-center" aria-label="Menü öffnen">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden border-b border-white/10 bg-velvet-900/95 backdrop-blur-2xl px-4 py-4 space-y-3">
+            <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-sm font-medium text-slate-200 hover:text-rose-400">Über mich</a>
+            <a href="#quiz" onclick="toggleMobileMenu()" class="block py-2 text-sm font-medium text-slate-200 hover:text-rose-400">Match-Quiz</a>
+            <a href="#gallery" onclick="toggleMobileMenu()" class="block py-2 text-sm font-medium text-slate-200 hover:text-rose-400">Fotos</a>
+            <a href="#date-form" onclick="toggleMobileMenu()" class="block py-2 text-sm font-medium text-slate-200 hover:text-rose-400">Date-Planer</a>
+            <a href="#comments" onclick="toggleMobileMenu()" class="block py-2 text-sm font-medium text-slate-200 hover:text-rose-400">Gästebuch</a>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8 pb-20 space-y-12 sm:space-y-16">
+
+    <!-- Profile Hero Section -->
+    <section id="about" class="glass-card rounded-3xl p-5 sm:p-10 relative overflow-hidden border border-white/20">
+        <!-- Decorative Accent Blur -->
+        <div class="absolute -right-16 -top-16 w-64 h-64 bg-rose-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="flex flex-col lg:flex-row items-center gap-6 lg:gap-12">
+            
+            <!-- Avatar / Main Photo mit elegantem abgerundeten Rahmen -->
+            <div class="relative group flex-shrink-0">
+			
+                <!-- Glowing Glow Effect -->
+                <!-- <div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-rose-500 via-purple-500 to-pink-500 blur opacity-70 group-hover:opacity-100 transition duration-500 animate-pulse-glow"></div> -->
+				
+<div class="absolute -inset-2.5 rounded-[2rem] blur-xl opacity-80 group-hover:opacity-100 transition-all duration-700 overflow-hidden pointer-events-none saturate-200 mix-blend-screen">
+  <!-- Der Hintergrund wirbelt die 7 Siri-Farben ineinander -->
+  <div class="absolute inset-[-150%] animate-siri-ai bg-siri-palette"></div>
+</div>
+
+
+                <div class="relative w-48 h-60 sm:w-64 sm:h-80 rounded-2xl overflow-hidden shadow-2xl">
+                    <img 
+                        src="images/bild11.jpg" 
+                        alt="Nico Portrait" 
+                        class="w-full h-full object-cover object-center group-hover:scale-105 transition duration-700"
+                    >
+                </div>
+            </div>
+
+            <!-- Info Column -->
+            <div class="flex-1 text-center lg:text-left space-y-4 sm:space-y-5">
+                
+                <!-- Name & Title -->
+                <div class="space-y-2">
+                    <h1 class="text-3xl sm:text-5xl font-serif font-bold text-white tracking-tight">
+                        Nico, <span class="gradient-text">25</span>
+                    </h1>
+                    <p class="text-base sm:text-lg text-rose-200/90 font-medium">Elektroniker & passionierter Bierverkoster</p>
+                    
+                    <!-- Location & Instagram Badges -->
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 pt-1">
+                        <!-- Standort -->
+                        <div class="flex items-center gap-1.5 bg-white/5 px-3.5 py-1.5 rounded-full border border-white/15 text-xs sm:text-sm text-slate-300">
+                            <span class="text-rose-400">📍</span>
+                            <span>Wilhelmshaven</span>
+                        </div>
+
+                        <!-- Instagram Link -->
+                        <a href="https://instagram.com/nico.nialst" target="_blank" rel="noopener noreferrer" 
+                           class="flex items-center gap-1.5 bg-white/5 hover:bg-pink-500/20 px-3.5 py-1.5 rounded-full border border-white/15 hover:border-pink-500/50 text-xs sm:text-sm text-slate-300 hover:text-white transition duration-300 group">
+                            <svg class="w-4 h-4 text-pink-400 group-hover:scale-110 transition duration-300" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                            <span>@nico.nialst</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Short Bio -->
+                <p class="text-slate-300 leading-relaxed max-w-2xl text-sm sm:text-base mx-auto lg:mx-0">
+                    Ich bin ein entspannter Typ, der das Leben nicht allzu ernst nimmt. Ich liebe meine zwei Katzen mindestens genauso wie den Sommer. Wenn ich nicht gerade Handball spiele, plane ich meist meinen nächsten Sommertrip oder ein Bierchen mit Freunden. Ich suche jemanden, der Spaß versteht, tierlieb ist und Lust hat, gemeinsam ruhige Kuschelabende als auch wilde Nächte zu erleben. Zudem liebe ich es täglich frisch zu kochen.
+                </p>
+
+                <!-- Key Traits Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 pt-2 text-xs sm:text-sm">
+                    <div class="p-2.5 rounded-xl bg-white/5 border border-white/15 text-center">
+                        <span class="block text-slate-400 text-xs mb-0.5">Größe</span>
+                        <span class="font-semibold text-white">1,75 m</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl bg-white/5 border border-white/15 text-center">
+                        <span class="block text-slate-400 text-xs mb-0.5">Sternzeichen</span>
+                        <span class="font-semibold text-white">Fische 🐟</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl bg-white/5 border border-white/15 text-center">
+                        <span class="block text-slate-400 text-xs mb-0.5">Persönlichkeit</span>
+                        <span class="font-semibold text-white">Offen & ehrlich</span>
+                    </div>
+                    <div class="p-2.5 rounded-xl bg-white/5 border border-white/15 text-center">
+                        <span class="block text-slate-400 text-xs mb-0.5">Sucht nach</span>
+                        <span class="font-semibold text-white">Echten Vibe 🥂</span>
+                    </div>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 pt-3">
+                    <a href="#date-form" class="gradient-btn text-white text-sm sm:text-base font-semibold px-5 sm:px-6 py-3 rounded-xl flex items-center gap-2 shadow-lg hover:scale-105 transition transform">
+                        <span>Date vorschlagen</span>
+                        <span class="text-lg">🥂</span>
+                    </a>
+                    <a href="#quiz" class="px-5 sm:px-6 py-3 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 font-semibold text-white text-sm sm:text-base transition flex items-center gap-2 hover:scale-105 transform">
+                        <span>Eisbrecher-Quiz</span>
+                        <span class="text-lg">🎲</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Interests Tags & Q&A Prompts Section -->
+    <section class="space-y-6 sm:space-y-8">
+        <div class="text-center space-y-2">
+            <h2 class="text-2xl sm:text-3xl font-serif font-bold text-white">Was mich begeistert</h2>
+            <p class="text-slate-400 text-sm">Ein kleiner Einblick in meine Welt & Leidenschaften</p>
+        </div>
+
+        <!-- Tags Cloud -->
+        <div class="flex flex-wrap justify-center gap-2 sm:gap-3">
+            <span class="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-rose-500/15 border border-rose-500/30 text-rose-200 text-xs sm:text-sm font-medium transition cursor-default">
+                ☕ Lieber Tee als Kaffee
+            </span>
+            <span class="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-purple-500/15 border border-purple-500/30 text-purple-200 text-xs sm:text-sm font-medium transition cursor-default">
+                🐈 Meine 2 Katzen
+            </span>
+            <span class="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-pink-500/15 border border-pink-500/30 text-pink-200 text-xs sm:text-sm font-medium transition cursor-default">
+                🍺 Kneipengänge
+            </span>
+            <span class="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-200 text-xs sm:text-sm font-medium transition cursor-default">
+                🏊 Saunagänge & Schwimmen
+            </span>
+            <span class="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-200 text-xs sm:text-sm font-medium transition cursor-default">
+                ✈️ Mallorca & USA Reisen
+            </span>
+            <span class="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-200 text-xs sm:text-sm font-medium transition cursor-default">
+                🎧 80/90ths, Schlager & Deutschrap
+            </span>
+            <span class="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-rose-500/15 border border-rose-500/30 text-rose-200 text-xs sm:text-sm font-medium transition cursor-default">
+                🎰 Casino
+            </span>
+            <span class="px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-200 text-xs sm:text-sm font-medium transition cursor-default">
+                🇩🇪 Deutscher
+            </span>
+        </div>
+
+        <!-- Prompt Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 pt-2">
+            <div class="glass-card glass-card-hover rounded-2xl p-5 sm:p-6 space-y-3 border border-white/20">
+                <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-xl font-bold border border-rose-500/30">
+                    ☀️
+                </div>
+                <h3 class="text-rose-300 text-xs font-bold tracking-wider uppercase">Mein perfekter Sonntag</h3>
+                <p class="text-slate-200 text-sm leading-relaxed">
+                    Ausschlafen, entspannt auf dem Balkon mit meinen beiden Tigern frühstücken. Der Rest des Tages wird meist lässig mit einer Runde Zocken oder einem Spaziergang angegangen.
+                </p>
+            </div>
+
+            <div class="glass-card glass-card-hover rounded-2xl p-5 sm:p-6 space-y-3 border border-white/20">
+                <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-xl font-bold border border-purple-500/30">
+                    💡
+                </div>
+                <h3 class="text-purple-300 text-xs font-bold tracking-wider uppercase">Der schnellste Weg zu meinem Herzen</h3>
+                <p class="text-slate-200 text-sm leading-relaxed">
+                    Humor und Leidenschaft für das, was du tust. Wenn du dann noch ein Familienmensch bist, passen wir perfekt zusammen.
+                </p>
+            </div>
+
+            <div class="glass-card glass-card-hover rounded-2xl p-5 sm:p-6 space-y-3 border border-white/20">
+                <div class="w-10 h-10 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center text-xl font-bold border border-pink-500/30">
+                    🚀
+                </div>
+                <h3 class="text-pink-300 text-xs font-bold tracking-wider uppercase">Wo sehe ich mich in der Zukunft</h3>
+                <p class="text-slate-200 text-sm leading-relaxed">
+                    In einem Haus in Wilhelmshaven, mit Haustieren, meiner Frau und unseren gemeinsamen Kindern.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Icebreaker Quiz Section -->
+    <section id="quiz" class="glass-card rounded-3xl p-5 sm:p-10 space-y-6 relative overflow-hidden border border-white/20">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
+            <div>
+                <span class="px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 text-xs font-semibold uppercase tracking-wider border border-rose-500/30">Interaktiv</span>
+                <h2 class="text-2xl sm:text-3xl font-serif font-bold text-white mt-1">Match-Meter & Eisbrecher 🎲</h2>
+                <p class="text-slate-400 text-sm">Beantworte 3 kurze Fragen und finde heraus, wie gut wir zusammenpassen!</p>
+            </div>
+            <div class="bg-white/10 px-4 py-2 rounded-2xl border border-white/15 text-center self-start sm:self-auto">
+                <span class="text-xs text-slate-400 block">Dein Match Score</span>
+                <span id="quiz-score" class="text-2xl font-bold gradient-text">0%</span>
+            </div>
+        </div>
+
+        <!-- Quiz Questions Container -->
+        <div id="quiz-questions" class="space-y-6">
+            <!-- Question 1 -->
+            <div class="quiz-step space-y-3" data-step="1">
+                <p class="text-base sm:text-lg font-medium text-slate-200">1. Was wäre dein ideales erstes Date?</p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <button type="button" onclick="answerQuiz(1, 25, this)" class="quiz-opt p-3.5 sm:p-4 rounded-xl bg-white/5 hover:bg-rose-500/20 border border-white/15 hover:border-rose-500/50 text-left transition text-sm min-h-[44px]">
+                        ☕ Entspannter Kaffee & Spaziergang
+                    </button>
+                    <button type="button" onclick="answerQuiz(1, 35, this)" class="quiz-opt p-3.5 sm:p-4 rounded-xl bg-white/5 hover:bg-rose-500/20 border border-white/15 hover:border-rose-500/50 text-left transition text-sm min-h-[44px]">
+                        🍸 Cocktails am Strand
+                    </button>
+                    <button type="button" onclick="answerQuiz(1, 15, this)" class="quiz-opt p-3.5 sm:p-4 rounded-xl bg-white/5 hover:bg-rose-500/20 border border-white/15 hover:border-rose-500/50 text-left transition text-sm min-h-[44px]">
+                        🎨 Museum, Galerie & Street Art
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="quiz-step space-y-3" data-step="2">
+                <p class="text-base sm:text-lg font-medium text-slate-200">2. Wie verbringst du am liebsten das Wochenende?</p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <button type="button" onclick="answerQuiz(2, 35, this)" class="quiz-opt p-3.5 sm:p-4 rounded-xl bg-white/5 hover:bg-purple-500/20 border border-white/15 hover:border-purple-500/50 text-left transition text-sm min-h-[44px]">
+                        🏔️ Wochenendtrips
+                    </button>
+                    <button type="button" onclick="answerQuiz(2, 25, this)" class="quiz-opt p-3.5 sm:p-4 rounded-xl bg-white/5 hover:bg-purple-500/20 border border-white/15 hover:border-purple-500/50 text-left transition text-sm min-h-[44px]">
+                        🍷 Leckeres Essen & Drinks mit Freunden
+                    </button>
+                    <button type="button" onclick="answerQuiz(2, 10, this)" class="quiz-opt p-3.5 sm:p-4 rounded-xl bg-white/5 hover:bg-purple-500/20 border border-white/15 hover:border-purple-500/50 text-left transition text-sm min-h-[44px]">
+                        📚 Gemütlich mit Büchern & Filmen
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="quiz-step space-y-3" data-step="3">
+                <p class="text-base sm:text-lg font-medium text-slate-200">3. Wohin geht die nächste Traumreise?</p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <button type="button" onclick="answerQuiz(3, 30, this)" class="quiz-opt p-3.5 sm:p-4 rounded-xl bg-white/5 hover:bg-pink-500/20 border border-white/15 hover:border-pink-500/50 text-left transition text-sm min-h-[44px]">
+                        🍣 Tokio & Japan entdecken
+                    </button>
+                    <button type="button" onclick="answerQuiz(3, 20, this)" class="quiz-opt p-3.5 sm:p-4 rounded-xl bg-white/5 hover:bg-pink-500/20 border border-white/15 hover:border-pink-500/50 text-left transition text-sm min-h-[44px]">
+                        🍝 Roadtrip durch die Toskana
+                    </button>
+                    <button type="button" onclick="answerQuiz(3, 15, this)" class="quiz-opt p-3.5 sm:p-4 rounded-xl bg-white/5 hover:bg-pink-500/20 border border-white/15 hover:border-pink-500/50 text-left transition text-sm min-h-[44px]">
+                        🌊 Skandinavische Fjorde & Natur
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quiz Result Message -->
+        <div id="quiz-result" class="hidden p-6 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-center space-y-3 animate-fade-in">
+            <div id="quiz-result-icon" class="text-4xl">🎉</div>
+            <h3 id="quiz-result-title" class="text-xl font-bold text-white">Ein phänomenales Match!</h3>
+            <p id="quiz-result-text" class="text-slate-300 text-sm max-w-lg mx-auto">
+                Wir haben absolut dieselben Vibes! Es scheint, als sollten wir nicht länger warten und direkt unser erstes Date planen!
+            </p>
+            <a href="#date-form" class="inline-block gradient-btn text-white font-semibold px-6 py-2.5 rounded-xl shadow-md text-sm mt-2">
+                Direkt Date planen 🥂
+            </a>
+        </div>
+    </section>
+
+    <!-- Photo Gallery Section mit abgerundeter Umrandung -->
+    <section id="gallery" class="space-y-6">
+        <div class="text-center space-y-2">
+            <h2 class="text-2xl sm:text-3xl font-serif font-bold text-white">Ein paar Einblicke 📸</h2>
+            <p class="text-slate-400 text-sm">Klicke auf ein Foto, um es vergrößert anzuzeigen</p>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+            <!-- Photo 1 -->
+            <div onclick="openLightbox('images/bild2.jpeg', 'Gemütlicher Abend in L`Osteria 🌇')" 
+                 class="group relative h-52 sm:h-80 rounded-2xl overflow-hidden cursor-pointer glass-card border border-white/20 hover:border-rose-500/50 transition-all duration-300">
+                <img 
+                    src="images/bild2.jpeg" 
+                    alt="Nico Foto 2" 
+                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                    onerror="this.onerror=null; this.src='images/bild1.jpeg';"
+                >
+                <div class="absolute inset-0 bg-gradient-to-t from-velvet-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 flex flex-col justify-end">
+                    <span class="text-white text-xs sm:text-sm font-semibold">Gemütlicher Abend in L`Osteria 🍕</span>
+                </div>
+            </div>
+
+            <!-- Photo 2 -->
+            <div onclick="openLightbox('images/bild3.jpeg', 'Auf Dienstreise mit Arbeitskollegen! ☕')" 
+                 class="group relative h-52 sm:h-80 rounded-2xl overflow-hidden cursor-pointer glass-card border border-white/20 hover:border-rose-500/50 transition-all duration-300">
+                <img 
+                    src="images/bild3.jpeg" 
+                    alt="Nico Foto 3" 
+                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                    onerror="this.onerror=null; this.src='images/bild1.jpeg';"
+                >
+                <div class="absolute inset-0 bg-gradient-to-t from-velvet-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 flex flex-col justify-end">
+                    <span class="text-white text-xs sm:text-sm font-semibold">Auf Dienstreise mit Arbeitskollegen 💼</span>
+                </div>
+            </div>
+
+            <!-- Photo 3 -->
+            <div onclick="openLightbox('images/bild4.jpeg', 'Ein paar Glühwein dürfen nicht fehlen ❄️')" 
+                 class="group relative h-52 sm:h-80 rounded-2xl overflow-hidden cursor-pointer glass-card border border-white/20 hover:border-rose-500/50 transition-all duration-300">
+                <img 
+                    src="images/bild4.jpeg" 
+                    alt="Nico Foto 4" 
+                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                    onerror="this.onerror=null; this.src='images/bild1.jpeg';"
+                >
+                <div class="absolute inset-0 bg-gradient-to-t from-velvet-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 flex flex-col justify-end">
+                    <span class="text-white text-xs sm:text-sm font-semibold">Ein paar Glühwein dürfen nicht fehlen ❄️</span>
+                </div>
+            </div>
+
+            <!-- Photo 4 -->
+            <div onclick="openLightbox('images/bild5.jpeg', 'Entspannter Abend nach einer harten Dienstreise 🛋️')" 
+                 class="group relative h-52 sm:h-80 rounded-2xl overflow-hidden cursor-pointer glass-card border border-white/20 hover:border-rose-500/50 transition-all duration-300">
+                <img 
+                    src="images/bild5.jpeg" 
+                    alt="Nico Foto 5" 
+                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                    onerror="this.onerror=null; this.src='images/bild1.jpeg';"
+                >
+                <div class="absolute inset-0 bg-gradient-to-t from-velvet-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 flex flex-col justify-end">
+                    <span class="text-white text-xs sm:text-sm font-semibold">Entspannter Abend nach Dienstreise 🛋️</span>
+                </div>
+            </div>
+
+            <!-- Photo 5 -->
+            <div onclick="openLightbox('images/bild8.jpeg', 'Gute Laune hoch 10 👆')" 
+                 class="group relative h-52 sm:h-80 rounded-2xl overflow-hidden cursor-pointer glass-card border border-white/20 hover:border-rose-500/50 transition-all duration-300">
+                <img 
+                    src="images/bild8.jpeg" 
+                    alt="Nico Foto 6" 
+                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                    onerror="this.onerror=null; this.src='images/bild1.jpeg';"
+                >
+                <div class="absolute inset-0 bg-gradient-to-t from-velvet-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 flex flex-col justify-end">
+                    <span class="text-white text-xs sm:text-sm font-semibold">Gute Laune hoch 10 👆</span>
+                </div>
+            </div>
+
+            <!-- Photo 6 -->
+            <div onclick="openLightbox('images/bild7.jpeg', 'Spaß darf nicht fehlen 😂')" 
+                 class="group relative h-52 sm:h-80 rounded-2xl overflow-hidden cursor-pointer glass-card border border-white/20 hover:border-rose-500/50 transition-all duration-300">
+                <img 
+                    src="images/bild7.jpeg" 
+                    alt="Nico Foto 7" 
+                    class="w-full h-full object-cover group-hover:scale-110 transition duration-500"
+                    onerror="this.onerror=null; this.src='images/bild1.jpeg';"
+                >
+                <div class="absolute inset-0 bg-gradient-to-t from-velvet-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-3 sm:p-4 flex flex-col justify-end">
+                    <span class="text-white text-xs sm:text-sm font-semibold">Spaß darf nicht fehlen 😂</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Date Proposal Form Section -->
+    <section id="date-form" class="glass-card rounded-3xl p-5 sm:p-10 space-y-6 sm:space-y-8 relative overflow-hidden border border-rose-500/40">
+        <!-- Background Glow -->
+        <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-rose-600/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="text-center max-w-xl mx-auto space-y-2">
+            <span class="px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 text-xs font-semibold uppercase tracking-wider border border-rose-500/30">
+                Unverbindlich & Charmant
+            </span>
+            <h2 class="text-2xl sm:text-4xl font-serif font-bold text-white">Plane unser erstes Date 🥂</h2>
+            <p class="text-slate-300 text-sm">Wähle dein Lieblingsrestaurant, ein Datum und eine Uhrzeit aus.</p>
+        </div>
+
+        <form id="dateProposalForm" onsubmit="handleDateSubmit(event)" class="space-y-6 max-w-3xl mx-auto">
+            
+            <!-- 1. Activity Selection -->
+            <div class="space-y-3">
+                <label class="block text-sm font-semibold text-rose-200">1. Lass uns Essen gehen! 🍽️ *</label>
+                <div class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-3" id="activity-options">
+                    <button type="button" onclick="selectActivity(this, 'Samos 🏛️')" class="activity-card p-3.5 sm:p-4 rounded-2xl bg-white/5 border border-white/15 hover:border-rose-500/50 text-left transition flex flex-col gap-1.5 group min-h-[70px]">
+                        <span class="text-2xl">🏛️</span>
+                        <span class="font-semibold text-white text-xs sm:text-sm">Samos</span>
+                        <span class="text-xs text-slate-400">Griechisches Restaurant</span>
+                    </button>
+
+                    <button type="button" onclick="selectActivity(this, 'Haruka 🍣')" class="activity-card p-3.5 sm:p-4 rounded-2xl bg-white/5 border border-white/15 hover:border-rose-500/50 text-left transition flex flex-col gap-1.5 group min-h-[70px]">
+                        <span class="text-2xl">🍣</span>
+                        <span class="font-semibold text-white text-xs sm:text-sm">Haruka</span>
+                        <span class="text-xs text-slate-400">Japanisches Sushi Restaurant</span>
+                    </button>
+
+                    <button type="button" onclick="selectActivity(this, 'Stella di Mare 🍕')" class="activity-card p-3.5 sm:p-4 rounded-2xl bg-white/5 border border-white/15 hover:border-rose-500/50 text-left transition flex flex-col gap-1.5 group min-h-[70px]">
+                        <span class="text-2xl">🍕</span>
+                        <span class="font-semibold text-white text-xs sm:text-sm">Stella di Mare</span>
+                        <span class="text-xs text-slate-400">Italienisches Restaurant</span>
+                    </button>
+
+                    <button type="button" onclick="selectActivity(this, 'Café & Bar Celona 🇪🇸')" class="activity-card p-3.5 sm:p-4 rounded-2xl bg-white/5 border border-white/15 hover:border-rose-500/50 text-left transition flex flex-col gap-1.5 group min-h-[70px]">
+                        <span class="text-2xl">🇪🇸</span>
+                        <span class="font-semibold text-white text-xs sm:text-sm">Café & Bar Celona</span>
+                        <span class="text-xs text-slate-400">Spanisch & Orientalisch</span>
+                    </button>
+
+                    <button type="button" onclick="selectActivity(this, 'Landfrieden 🥩')" class="activity-card p-3.5 sm:p-4 rounded-2xl bg-white/5 border border-white/15 hover:border-rose-500/50 text-left transition flex flex-col gap-1.5 group min-h-[70px]">
+                        <span class="text-2xl">🥩</span>
+                        <span class="font-semibold text-white text-xs sm:text-sm">Landfrieden</span>
+                        <span class="text-xs text-slate-400">Deutsches Steakhouse</span>
+                    </button>
+
+                    <button type="button" onclick="selectActivity(this, 'McDonalds 🍔')" class="activity-card p-3.5 sm:p-4 rounded-2xl bg-white/5 border border-white/15 hover:border-rose-500/50 text-left transition flex flex-col gap-1.5 group min-h-[70px]">
+                        <span class="text-2xl">🍔</span>
+                        <span class="font-semibold text-white text-xs sm:text-sm">McDonalds</span>
+                        <span class="text-xs text-slate-400">Amerikanisches Schnellrestaurant</span>
+                    </button>
+                </div>
+                <input type="hidden" id="selectedActivity" name="activity" required>
+            </div>
+
+            <!-- 2. Date & Time Selection -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+                <!-- Date Picker -->
+                <div class="space-y-2">
+                    <label for="date-input" class="block text-sm font-semibold text-rose-200">2. An welchem Tag? *</label>
+                    <input type="date" id="date-input" required class="glass-input w-full px-4 py-3 rounded-xl text-sm font-medium focus:ring-2 focus:ring-rose-500 min-h-[48px]">
+                </div>
+
+                <!-- Time Selection Chips -->
+                <div class="space-y-2">
+                    <label class="block text-sm font-semibold text-rose-200">3. Um wie viel Uhr? *</label>
+                    <div class="flex flex-wrap gap-2" id="time-options">
+                        <button type="button" onclick="selectTime(this, '17:00 Uhr')" class="time-chip px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/15 hover:border-rose-500/50 text-xs font-semibold text-slate-200 transition min-h-[44px] flex items-center">17:00</button>
+                        <button type="button" onclick="selectTime(this, '18:00 Uhr')" class="time-chip px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/15 hover:border-rose-500/50 text-xs font-semibold text-slate-200 transition min-h-[44px] flex items-center">18:00</button>
+                        <button type="button" onclick="selectTime(this, '19:00 Uhr')" class="time-chip px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/15 hover:border-rose-500/50 text-xs font-semibold text-slate-200 transition min-h-[44px] flex items-center">19:00</button>
+                        <button type="button" onclick="selectTime(this, '20:00 Uhr')" class="time-chip px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/15 hover:border-rose-500/50 text-xs font-semibold text-slate-200 transition min-h-[44px] flex items-center">20:00</button>
+                        <button type="button" onclick="selectTime(this, '21:00 Uhr')" class="time-chip px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/15 hover:border-rose-500/50 text-xs font-semibold text-slate-200 transition min-h-[44px] flex items-center">21:00</button>
+                    </div>
+                    <input type="hidden" id="selectedTime" name="time" required>
+                </div>
+            </div>
+
+            <!-- 3. Sender Name & Message -->
+            <div class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label for="sender-name" class="block text-sm font-semibold text-rose-200 mb-1">Dein Name *</label>
+                        <input type="text" id="sender-name" placeholder="z.B. Lea" required class="glass-input w-full px-4 py-3 rounded-xl text-sm min-h-[48px]">
+                    </div>
+                    <div>
+                        <label for="sender-contact" class="block text-sm font-semibold text-rose-200 mb-1">Deine Handynummer / Instagram</label>
+                        <input type="text" id="sender-contact" placeholder="@dein_name oder 0176..." class="glass-input w-full px-4 py-3 rounded-xl text-sm min-h-[48px]">
+                    </div>
+                </div>
+
+                <div>
+                    <label for="sender-note" class="block text-sm font-semibold text-rose-200 mb-1">Persönliche Nachricht</label>
+                    <textarea id="sender-note" rows="3" placeholder="Hinterlasse eine persönliche Nachricht für Nico ..." class="glass-input w-full px-4 py-3 rounded-xl text-sm resize-none"></textarea>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="w-full gradient-btn py-3.5 sm:py-4 rounded-2xl text-white font-bold text-base tracking-wide flex items-center justify-center gap-2 shadow-xl active:scale-95 sm:hover:scale-[1.01] transition duration-300 min-h-[50px]">
+                <span>Date-Anfrage jetzt senden</span>
+                <span class="text-xl">💌</span>
+            </button>
+        </form>
+
+        <!-- Sent Proposals Drawer Toggle -->
+        <div class="pt-2 text-center">
+            <button onclick="toggleProposalsModal()" class="text-xs text-rose-300 hover:text-white underline flex items-center justify-center gap-1 mx-auto min-h-[40px]">
+                <span>Gesendete Date-Anfragen anzeigen (<span id="proposal-count">0</span>)</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Visueller Trenner zum Rest der Seite -->
+    <div class="relative py-8 sm:py-12">
+        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+            <div class="w-full border-t border-white/10"></div>
+        </div>
+        <div class="relative flex justify-center">
+            <span class="px-4 py-1 rounded-full bg-slate-900/90 text-rose-300 border border-rose-500/30 text-xs font-semibold uppercase tracking-widest backdrop-blur-md shadow-lg flex items-center gap-2">
+                <span>💬</span>
+                <span>Gästebuch</span>
+            </span>
+        </div>
+    </div>
+
+    <!-- Guestbook / Comments Section -->
+    <section id="comments" class="glass-card rounded-3xl p-5 sm:p-10 space-y-6 sm:space-y-8 relative overflow-hidden border border-white/20 shadow-2xl">
+        
+        <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-purple-600/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="text-center space-y-2 border-b border-white/10 pb-6">
+            <h2 class="text-2xl sm:text-3xl font-serif font-bold text-white">Gästebuch & Kommentare 💬</h2>
+            <p class="text-slate-400 text-sm">Hinterlasse eine liebe Nachricht oder eine kleine Reaktion!</p>
+        </div>
+
+        <!-- Comment Form -->
+        <div class="bg-white/5 border border-white/15 rounded-2xl p-4 sm:p-6 max-w-2xl mx-auto">
+            <form id="commentForm" onsubmit="handleAddComment(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Dein Name *</label>
+                        <input type="text" id="comment-author" placeholder="z.B. Marco" required class="glass-input w-full px-3.5 py-2.5 rounded-xl text-sm min-h-[44px]">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Emoji-Stimmung *</label>
+						<div class="flex flex-wrap items-center gap-2" id="emoji-picker">
+							<button type="button" onclick="selectEmoji(this, '❤️')" class="emoji-btn flex-1 min-w-[44px] p-2.5 rounded-xl bg-white/5 border border-white/15 hover:bg-rose-500/30 text-lg transition flex items-center justify-center min-h-[44px]">❤️</button>
+							<button type="button" onclick="selectEmoji(this, '✨')" class="emoji-btn flex-1 min-w-[44px] p-2.5 rounded-xl bg-white/5 border border-white/15 hover:bg-rose-500/30 text-lg transition flex items-center justify-center min-h-[44px]">✨</button>
+							<button type="button" onclick="selectEmoji(this, '☕')" class="emoji-btn flex-1 min-w-[44px] p-2.5 rounded-xl bg-white/5 border border-white/15 hover:bg-rose-500/30 text-lg transition flex items-center justify-center min-h-[44px]">☕</button>
+							<button type="button" onclick="selectEmoji(this, '🔥')" class="emoji-btn flex-1 min-w-[44px] p-2.5 rounded-xl bg-white/5 border border-white/15 hover:bg-rose-500/30 text-lg transition flex items-center justify-center min-h-[44px]">🔥</button>
+							<button type="button" onclick="selectEmoji(this, '🥂')" class="emoji-btn flex-1 min-w-[44px] p-2.5 rounded-xl bg-white/5 border border-white/15 hover:bg-rose-500/30 text-lg transition flex items-center justify-center min-h-[44px]">🥂</button>
+						</div>
+                        <input type="hidden" id="selectedEmoji" value="" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">Dein Kommentar *</label>
+                    <textarea id="comment-text" rows="3" required placeholder="Super sympathisches Profil! Die Samos-Auswahl gefällt mir sehr..." class="glass-input w-full px-3.5 py-2.5 rounded-xl text-sm resize-none"></textarea>
+                </div>
+
+                <button type="submit" class="w-full sm:w-auto px-6 py-3 rounded-xl gradient-btn text-white text-sm font-semibold flex items-center justify-center gap-2 min-h-[44px]">
+                    <span>Kommentar veröffentlichen</span>
+                    <span>✍️</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- Comments List Area -->
+        <div class="max-w-2xl mx-auto space-y-4 pt-4 border-t border-white/10">
+            <div class="flex items-center justify-between">
+                <h3 class="text-base font-semibold text-white flex items-center gap-2">
+                    <span>Nachrichten</span>
+                    <span id="comment-badge" class="px-2.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 text-xs font-bold border border-rose-500/30">0</span>
+                </h3>
+            </div>
+
+            <!-- Die ersten 3 Kommentare -->
+            <div id="comments-container-visible" class="space-y-3"></div>
+
+            <!-- Versteckter Bereich für alle Kommentare ab Nr. 4 -->
+            <div id="comments-container-hidden" class="hidden space-y-3 transition-all duration-300"></div>
+
+            <!-- Button zum Ausklappen -->
+            <div id="comments-toggle-wrapper" class="hidden text-center pt-2">
+                <button id="toggle-comments-btn" onclick="toggleMoreComments()" type="button" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-xs sm:text-sm font-semibold text-slate-200 hover:text-white transition inline-flex items-center gap-2 group shadow-lg min-h-[44px]">
+                    <span id="toggle-comments-text">Weitere Kommentare anzeigen</span>
+                    <span id="toggle-comments-count" class="px-2 py-0.5 rounded-full bg-rose-500/30 text-rose-300 text-xs font-bold group-hover:bg-rose-500/50 transition">+0</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-white/10 bg-velvet-900/80 py-8 text-center text-xs text-slate-400">
+        <p>Mit ❤️ gestaltet für unvergessliche Begegnungen in Wilhelmshaven</p>
+        <p class="mt-1 text-slate-500">Nico's Dating App Profile © <span id="year">2026</span></p>
+    </footer>
+
+    <!-- MODAL 1: Photo Lightbox -->
+    <div id="lightboxModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl hidden flex items-center justify-center p-4 transition-opacity duration-300 overflow-y-auto">
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white/70 hover:text-white text-3xl font-bold z-10 p-2 min-w-[44px] min-h-[44px] flex items-center justify-center">
+            &times;
+        </button>
+        <div class="max-w-4xl max-h-[90vh] flex flex-col items-center space-y-3 my-auto">
+            <img id="lightboxImage" src="" alt="Enlarged Photo" class="max-h-[75vh] w-auto rounded-2xl shadow-2xl object-contain border border-white/20">
+            <p id="lightboxCaption" class="text-slate-200 text-sm font-medium text-center"></p>
+        </div>
+    </div>
+
+    <!-- MODAL 2: Date Request Success Modal -->
+    <div id="dateSuccessModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="glass-card max-w-md w-full rounded-3xl p-6 sm:p-8 space-y-6 text-center border border-rose-500/40 relative my-auto">
+            <div class="w-16 h-16 rounded-full bg-rose-500/20 text-rose-400 border border-rose-500/40 flex items-center justify-center text-3xl mx-auto animate-bounce">
+                💌
+            </div>
+            
+            <div class="space-y-2">
+                <h3 class="text-2xl font-serif font-bold text-white">Date-Anfrage gesendet!</h3>
+                <p class="text-slate-300 text-sm">
+                    Vielen Dank! Deine Anfrage wurde erfolgreich übermittelt und gespeichert.
+                </p>
+            </div>
+
+            <!-- Proposal Summary Box -->
+            <div id="successSummary" class="p-4 rounded-2xl bg-white/5 border border-white/15 text-left text-xs space-y-2 text-slate-200">
+                <!-- Filled via JS -->
+            </div>
+
+            <button onclick="closeDateSuccessModal()" class="w-full gradient-btn py-3 rounded-xl text-white font-semibold text-sm min-h-[44px]">
+                Aussichtsvoll! Zurück zum Profil ✨
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL 3: Sent Proposals Viewer -->
+    <div id="proposalsModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="glass-card max-w-lg w-full rounded-3xl p-5 sm:p-8 space-y-6 max-h-[85vh] flex flex-col border border-white/20 my-auto">
+            <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                <h3 class="text-xl font-bold text-white font-serif">Gesendete Date-Anfragen 🥂</h3>
+                <button onclick="toggleProposalsModal()" class="text-slate-400 hover:text-white text-2xl font-bold p-1 min-w-[40px] min-h-[40px]">&times;</button>
+            </div>
+
+            <div id="proposals-list" class="flex-1 overflow-y-auto space-y-3 pr-2">
+                <!-- Dynamically populated -->
+            </div>
+
+            <button onclick="toggleProposalsModal()" class="w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-medium text-sm min-h-[44px]">
+                Schließen
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Dynamic year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        /* ==========================================================================
+           1. FLOATING HEARTS BACKGROUND CANVAS ANIMATION
+           ========================================================================== */
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        class FloatingHeart {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * width;
+                this.y = height + 20 + Math.random() * 50;
+                this.size = Math.random() * 10 + 6;
+                this.speedY = Math.random() * 0.8 + 0.3;
+                this.speedX = Math.sin(Math.random() * Math.PI) * 0.4;
+                this.opacity = Math.random() * 0.4 + 0.15;
+                this.hue = Math.floor(Math.random() * 30 + 330);
+            }
+
+            update() {
+                this.y -= this.speedY;
+                this.x += Math.sin(this.y * 0.01) * 0.5;
+                if (this.y < -30) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.fillStyle = `hsla(${this.hue}, 80%, 65%, ${this.opacity})`;
+                ctx.beginPath();
+                const d = this.size;
+                ctx.moveTo(0, 0);
+                ctx.bezierCurveTo(-d / 2, -d / 2, -d, d / 3, 0, d);
+                ctx.bezierCurveTo(d, d / 3, d / 2, -d / 2, 0, 0);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        const heartCount = window.innerWidth < 640 ? 15 : 25;
+        const hearts = Array.from({ length: heartCount }, () => new FloatingHeart());
+
+        function animateBg() {
+            ctx.clearRect(0, 0, width, height);
+            hearts.forEach(heart => {
+                heart.update();
+                heart.draw();
+            });
+            requestAnimationFrame(animateBg);
+        }
+
+        window.onload = function() {
+            animateBg();
+            loadComments();
+            updateProposalCount();
+            
+            const dateInput = document.getElementById('date-input');
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.setAttribute('min', today);
+            }
+        };
+
+        /* ==========================================================================
+           2. ICEBREAKER QUIZ LOGIC
+           ========================================================================== */
+        let selectedAnswers = {};
+
+        function answerQuiz(step, points, btnElement) {
+            selectedAnswers[step] = points;
+
+            const parent = btnElement.closest('.quiz-step');
+            const buttons = parent.querySelectorAll('button');
+            buttons.forEach(b => {
+                b.classList.remove('bg-rose-500/30', 'border-rose-500', 'bg-purple-500/30', 'border-purple-500', 'bg-pink-500/30', 'border-pink-500');
+                b.classList.add('bg-white/5', 'border-white/15');
+            });
+
+            btnElement.classList.remove('bg-white/5', 'border-white/15');
+            btnElement.classList.add('bg-rose-500/30', 'border-rose-500');
+
+            let totalScore = 0;
+            Object.values(selectedAnswers).forEach(val => totalScore += val);
+
+            document.getElementById('quiz-score').textContent = totalScore + '%';
+
+            if (Object.keys(selectedAnswers).length === 3) {
+                const resultContainer = document.getElementById('quiz-result');
+                const resultIcon = document.getElementById('quiz-result-icon');
+                const resultTitle = document.getElementById('quiz-result-title');
+                const resultText = document.getElementById('quiz-result-text');
+
+                resultContainer.classList.remove('hidden');
+
+                if (totalScore > 80) {
+                    resultIcon.textContent = "🎉";
+                    resultTitle.textContent = "Ein phänomenales Match!";
+                    resultText.textContent = "Wir haben absolut dieselben Vibes! Es scheint, als sollten wir nicht länger warten und direkt unser erstes Date planen!";
+                    confettiBurst();
+                } else if (totalScore >= 45) {
+                    resultIcon.textContent = "✨";
+                    resultTitle.textContent = "Ziemlich gutes Match!";
+                    resultText.textContent = "Wir teilen viele Gemeinsamkeiten und haben tolle Überschneidungen. Das klingt nach einer super Basis für ein spontanes Treffen!";
+                } else {
+                    resultIcon.textContent = "⚡";
+                    resultTitle.textContent = "Gegensätze ziehen sich an!";
+                    resultText.textContent = "Wir haben zwar unterschiedliche Vorlieben, aber genau das macht es doch spannend! Lust herauszufinden, ob die Chemie trotzdem stimmt?";
+                }
+
+                resultContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        /* ==========================================================================
+           3. PHOTO LIGHTBOX MODAL
+           ========================================================================== */
+        function openLightbox(imgUrl, caption) {
+            const modal = document.getElementById('lightboxModal');
+            document.getElementById('lightboxImage').src = imgUrl;
+            document.getElementById('lightboxCaption').textContent = caption;
+            modal.classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').classList.add('hidden');
+        }
+
+        /* ==========================================================================
+           4. DATE PROPOSAL FORM LOGIC
+           ========================================================================== */
+        function selectActivity(button, activityName) {
+            document.querySelectorAll('.activity-card').forEach(card => {
+                card.classList.remove('bg-rose-500/30', 'border-rose-500', 'ring-2', 'ring-rose-500/50');
+                card.classList.add('border-white/15');
+            });
+            button.classList.remove('border-white/15');
+            button.classList.add('bg-rose-500/30', 'border-rose-500', 'ring-2', 'ring-rose-500/50');
+            document.getElementById('selectedActivity').value = activityName;
+        }
+
+        function selectTime(button, timeStr) {
+            document.querySelectorAll('.time-chip').forEach(chip => {
+                chip.classList.remove('bg-rose-500', 'border-rose-500', 'text-white');
+                chip.classList.add('border-white/15');
+            });
+            button.classList.remove('border-white/15');
+            button.classList.add('bg-rose-500', 'border-rose-500', 'text-white');
+            document.getElementById('selectedTime').value = timeStr;
+        }
+
+        function handleDateSubmit(e) {
+            e.preventDefault();
+
+            const activity = document.getElementById('selectedActivity').value;
+            const time = document.getElementById('selectedTime').value;
+            const dateVal = document.getElementById('date-input').value;
+            const name = document.getElementById('sender-name').value;
+            const contact = document.getElementById('sender-contact').value;
+            const note = document.getElementById('sender-note').value;
+
+            if (!activity) {
+                alertCustom('Bitte wähle ein Restaurant/Aktivität aus! ☕');
+                return;
+            }
+            if (!time) {
+                alertCustom('Bitte wähle eine Uhrzeit aus! ⏰');
+                return;
+            }
+
+            const proposal = {
+                id: Date.now(),
+                activity,
+                date: dateVal,
+                time,
+                name,
+                contact: contact || 'Keine Kontaktangabe',
+                note: note || 'Keine Notiz',
+                timestamp: new Date().toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })
+            };
+
+            const proposals = JSON.parse(localStorage.getItem('nico_date_proposals') || '[]');
+            proposals.push(proposal);
+            localStorage.setItem('nico_date_proposals', JSON.stringify(proposals));
+
+            updateProposalCount();
+
+            document.getElementById('successSummary').innerHTML = `
+                <div><span class="text-rose-400 font-semibold">Anfragensteller:</span> ${escapeHtml(name)}</div>
+                <div><span class="text-rose-400 font-semibold">Aktivität:</span> ${escapeHtml(activity)}</div>
+                <div><span class="text-rose-400 font-semibold">Datum & Uhrzeit:</span> ${escapeHtml(dateVal)} um ${escapeHtml(time)}</div>
+                <div><span class="text-rose-400 font-semibold">Kontakt:</span> ${escapeHtml(contact || '-')}</div>
+                ${note ? `<div><span class="text-rose-400 font-semibold">Nachricht:</span> "${escapeHtml(note)}"</div>` : ''}
+            `;
+
+            confettiBurst();
+            document.getElementById('dateSuccessModal').classList.remove('hidden');
+
+            document.getElementById('dateProposalForm').reset();
+            document.querySelectorAll('.activity-card, .time-chip').forEach(el => {
+                el.classList.remove('bg-rose-500/30', 'border-rose-500', 'bg-rose-500', 'text-white', 'ring-2', 'ring-rose-500/50');
+                el.classList.add('border-white/15');
+            });
+            document.getElementById('selectedActivity').value = '';
+            document.getElementById('selectedTime').value = '';
+        }
+
+        function closeDateSuccessModal() {
+            document.getElementById('dateSuccessModal').classList.add('hidden');
+        }
+
+        function updateProposalCount() {
+            const proposals = JSON.parse(localStorage.getItem('nico_date_proposals') || '[]');
+            document.getElementById('proposal-count').textContent = proposals.length;
+        }
+
+        function toggleProposalsModal() {
+            const modal = document.getElementById('proposalsModal');
+            const listContainer = document.getElementById('proposals-list');
+
+            if (modal.classList.contains('hidden')) {
+                const proposals = JSON.parse(localStorage.getItem('nico_date_proposals') || '[]');
+                
+                if (proposals.length === 0) {
+                    listContainer.innerHTML = '<p class="text-slate-400 text-xs text-center py-6">Noch keine Date-Anfragen gesendet. Werde die Erste! 😉</p>';
+                } else {
+                    listContainer.innerHTML = proposals.map(p => `
+                        <div class="p-3.5 rounded-2xl bg-white/5 border border-white/15 text-xs space-y-1 relative">
+                            <div class="flex items-center justify-between font-bold text-rose-300">
+                                <span>${escapeHtml(p.activity)}</span>
+                                <span class="text-[10px] text-slate-400 font-normal">${p.timestamp}</span>
+                            </div>
+                            <div class="text-slate-200"><strong>Termin:</strong> ${escapeHtml(p.date)} um ${escapeHtml(p.time)}</div>
+                            <div class="text-slate-300"><strong>Von:</strong> ${escapeHtml(p.name)} (${escapeHtml(p.contact)})</div>
+                            ${p.note ? `<div class="text-slate-400 italic">"${escapeHtml(p.note)}"</div>` : ''}
+                        </div>
+                    `).join('');
+                }
+
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        /* ==========================================================================
+           5. GUESTBOOK / COMMENTS SYSTEM
+           ========================================================================== */
+        const DEFAULT_COMMENTS = [
+            {
+                id: 1,
+                author: "Basti U.",
+                emoji: "☕",
+                text: "Sehr hübsch der Bursche, ich glaub ich würde!",
+                date: "Vor 2 Stunden"
+            },
+            {
+                id: 2,
+                author: "Sophie",
+                emoji: "✨",
+                text: "Tolles Profil, Nico! Die Samos-Empfehlung muss ich mir merken.",
+                date: "Gestern"
+            }
+        ];
+
+        let showAllComments = false;
+
+        function loadComments() {
+            let comments = JSON.parse(localStorage.getItem('nico_comments'));
+            if (!comments || comments.length === 0) {
+                comments = DEFAULT_COMMENTS;
+                localStorage.setItem('nico_comments', JSON.stringify(comments));
+            }
+            renderComments();
+        }
+
+        function selectEmoji(btnElement, emoji) {
+            document.getElementById('selectedEmoji').value = emoji;
+
+            const buttons = document.querySelectorAll('.emoji-btn');
+            buttons.forEach(b => {
+                b.classList.remove('bg-rose-500/30', 'border-rose-500', 'ring-2', 'ring-rose-500/50');
+                b.classList.add('bg-white/5', 'border-white/15');
+            });
+
+            btnElement.classList.remove('bg-white/5', 'border-white/15');
+            btnElement.classList.add('bg-rose-500/30', 'border-rose-500', 'ring-2', 'ring-rose-500/50');
+        }
+
+        function handleAddComment(event) {
+            event.preventDefault();
+
+            const author = document.getElementById('comment-author').value.trim();
+            const emoji = document.getElementById('selectedEmoji').value;
+            const text = document.getElementById('comment-text').value.trim();
+
+            if (!emoji) {
+                alertCustom("Bitte wähle eine Emoji-Stimmung aus!");
+                return;
+            }
+
+            const newComment = {
+                id: Date.now(),
+                author,
+                emoji,
+                text,
+                date: new Date().toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+            };
+
+            const comments = JSON.parse(localStorage.getItem('nico_comments') || '[]');
+            comments.push(newComment);
+            localStorage.setItem('nico_comments', JSON.stringify(comments));
+
+            document.getElementById('commentForm').reset();
+            document.getElementById('selectedEmoji').value = "";
+            
+            document.querySelectorAll('.emoji-btn').forEach(b => {
+                b.classList.remove('bg-rose-500/30', 'border-rose-500', 'ring-2', 'ring-rose-500/50');
+                b.classList.add('bg-white/5', 'border-white/15');
+            });
+
+            renderComments();
+        }
+
+        function renderComments() {
+            const comments = JSON.parse(localStorage.getItem('nico_comments') || '[]');
+            const visibleContainer = document.getElementById('comments-container-visible');
+            const hiddenContainer = document.getElementById('comments-container-hidden');
+            const toggleWrapper = document.getElementById('comments-toggle-wrapper');
+            const badgeSpan = document.getElementById('comment-badge');
+            const toggleCountSpan = document.getElementById('toggle-comments-count');
+            const toggleTextSpan = document.getElementById('toggle-comments-text');
+
+            if (!visibleContainer) return;
+
+            badgeSpan.textContent = comments.length;
+
+            if (comments.length === 0) {
+                visibleContainer.innerHTML = `
+                    <div class="text-center py-8 text-slate-400 text-sm bg-white/5 rounded-2xl border border-white/10">
+                        Noch keine Kommentare vorhanden. Sei die/der Erste! ✨
+                    </div>`;
+                hiddenContainer.innerHTML = '';
+                toggleWrapper.classList.add('hidden');
+                return;
+            }
+
+            const reversed = [...comments].reverse();
+            const firstThree = reversed.slice(0, 3);
+            const remaining = reversed.slice(3);
+
+            visibleContainer.innerHTML = firstThree.map(c => createCommentCardHTML(c)).join('');
+
+            if (remaining.length > 0) {
+                hiddenContainer.innerHTML = remaining.map(c => createCommentCardHTML(c)).join('');
+                toggleWrapper.classList.remove('hidden');
+                toggleCountSpan.textContent = `+${remaining.length}`;
+
+                if (showAllComments) {
+                    hiddenContainer.classList.remove('hidden');
+                    toggleTextSpan.textContent = 'Weniger anzeigen';
+                } else {
+                    hiddenContainer.classList.add('hidden');
+                    toggleTextSpan.textContent = 'Weitere Kommentare anzeigen';
+                }
+            } else {
+                hiddenContainer.innerHTML = '';
+                hiddenContainer.classList.add('hidden');
+                toggleWrapper.classList.add('hidden');
+            }
+        }
+
+        function toggleMoreComments() {
+            showAllComments = !showAllComments;
+            renderComments();
+        }
+
+        function createCommentCardHTML(c) {
+            return `
+                <div class="p-4 rounded-2xl bg-white/5 border border-white/15 space-y-1.5 transition hover:bg-white/10">
+                    <div class="flex items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg">${c.emoji || '❤️'}</span>
+                            <span class="font-semibold text-white text-sm">${escapeHtml(c.author)}</span>
+                        </div>
+                        <span class="text-[11px] text-slate-400">${c.date || ''}</span>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed pl-7">${escapeHtml(c.text)}</p>
+                </div>
+            `;
+        }
+
+        /* ==========================================================================
+           6. UTILITY FUNCTIONS
+           ========================================================================== */
+        function confettiBurst() {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 80,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#f43f5e', '#e11d48', '#c084fc', '#ffffff']
+                });
+            }
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>"']/g, function(m) {
+                return {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;'
+                }[m];
+            });
+        }
+
+        function alertCustom(message) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-6 right-6 z-50 glass-card bg-rose-600/90 border border-white/30 text-white text-sm font-semibold px-5 py-3 rounded-2xl shadow-2xl transition duration-500 animate-bounce';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+    </script>
+</body>
+</html>
